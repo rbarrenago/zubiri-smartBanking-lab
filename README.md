@@ -1,24 +1,31 @@
-# ZUBIRI FinAI Lab — GitHub Pages v1.1
+# ZUBIRI smart Banking Lab — GitHub Pages v1.2 · Banking review
 
-A self-contained bilingual educational demonstration. All transactions are fictitious and synthesized.
+Bilingual (Basque / Spanish) educational proof of concept showing ML daily-sales forecasting plus a **separate** simplified business cash-flow simulator. All balances, revenues and payments are synthetic; this is **not** a regulated stress test, a bank's liquidity-risk model, a creditworthiness assessment, or operational financial advice.
 
-## How to publish an update (no command line)
+## Open in browser
+- `index.html`: bilingual entry point
+- `ZUBIRI_FinAI_Lab_Demo_EU.html`: Basque interactive demo
+- `ZUBIRI_FinAI_Lab_Demo.html`: Spanish interactive demo
+- `data/synthetic_transactions.csv`: complete 493-row synthetic training case
+- `technical/MODEL_CARD_EU.md`, `technical/MODEL_CARD_ES.md`: methods, caveats and validation gates
+- `technical/build_model.py`: code to regenerate synthetic dataset/model outputs
 
-1. Unzip this package on your computer.
-2. Open the root of your existing GitHub repository `zubiri-smartBanking-lab`.
-3. Choose **Add file → Upload files**, upload the extracted `index.html`, both demo HTML files, `README.md`, and `.nojekyll` into the **root**, not into a new subfolder. Use **Commit changes** to replace the older versions.
-4. Check **Actions** for the latest GitHub Pages deployment; refresh the browser to see the new version.
+## Update an existing GitHub Pages repository (no command line)
+1. Extract the ZIP on your computer.
+2. Open your existing `zubiri-smartBanking-lab` repository → **Add file → Upload files**.
+3. Upload the files and folders to the **repository root**, preserving the `data/` and `technical/` folders. Confirm the replacements and **Commit changes**.
+4. GitHub Pages configuration: `Settings → Pages → Deploy from a branch → main → /(root)`. After deployment, refresh your page.
 
-If this is your first upload, configure Settings → Pages → Deploy from a branch → main → /(root).
+Only `index.html`, the two demo HTML files, and `data/synthetic_transactions.csv` are required for the interactive site. The technical resources are recommended for due diligence/reproducibility.
 
-## What changed
+## Changes from v1.1
+- Tightened bank-domain terminology: settlements vs sales; projected business cash balance vs available account balance; simulation threshold vs credit-risk alert; stress scenario vs regulatory stress testing.
+- Added bank-facing section 04 in both languages (business banking, data science, security/risk and regulatory governance).
+- Added glossary, pilot validation gates, student skill mappings and explicit methodological cautions.
+- Kept the SmartCity future research section independent of any banking/commercial data exchange.
+- Kept simulation controls (30/60/90 days; scenarios and sliders), output and CSV exports.
 
-- Added 3 complete, navigable educational sections in both Basque and Spanish:
-  1. What the demo does, including a concrete real row from the *synthetic* transactions CSV.
-  2. The 493-day synthetic dataset and the crucial distinction between ML inputs and simulator inputs.
-  3. The ML forecast, temporal holdout, baseline MAE, cash-balance equation, and simulation uncertainty.
-- Added an explicitly **future, independent** SmartCity research connection focused on urban mobility, events, and public planning — **not** a bank service for local commerce or data sharing.
-- Kept all interactive controls, forecasts and CSV export unchanged.
+## Important methodological limitation
+The baseline in the 75-day test uses prior *observed* test-window sales for rolling weekday averages. The ML comparison is therefore **not** a fully horizon-matched forecasting study. For a serious pilot, run comparable rolling-origin backtests at defined horizons, and test actual cash-balance predictions as well as sales.
 
-The demos are static HTML with embedded synthetic data; no external services or credentials are required.
-Do not commit customer data or banking credentials. This is not financial advice or a production bank product.
+No private banking/customer data, API keys or credentials should be added to this public GitHub repository.
