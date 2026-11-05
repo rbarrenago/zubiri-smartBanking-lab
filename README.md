@@ -1,4 +1,4 @@
-# ZUBIRI FinAI Lab — GitHub Pages v1.3 · Banking edition
+# ZUBIRI Smart Bankig Lab — GitHub Pages v1.3 · Banking edition
 
 Bilingual (Basque / Spanish) educational prototype: **ML forecasting of daily sales** plus a separate simulated SME cash-flow projection. All data and balances are synthetic. Not a bank liquidity-risk model, credit score, regulatory stress test, or financial advice.
 
