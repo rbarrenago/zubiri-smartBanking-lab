@@ -1,10 +1,10 @@
-# ZUBIRI FinAI Lab — GitHub Pages
+# ZUBIRI SmartBanking Lab — GitHub Pages
 
 Demostración educativa de un prototipo de IA para prever la tesorería de una pequeña empresa. **Todos los datos son sintéticos**.
 
 ## Publicar en GitHub Pages (sin terminal)
 
-1. Crea un repositorio público, por ejemplo `zubiri-finai-lab`.
+1. Crea un repositorio público, por ejemplo `zubiri-smartBanking-lab`.
 2. Abre el ZIP y descomprímelo en tu ordenador.
 3. En GitHub, pulsa **Add file → Upload files** y sube **los archivos sueltos** de esta carpeta a la raíz del repositorio. **No subas únicamente el ZIP**.
 4. Confirma el commit con **Commit changes**.
