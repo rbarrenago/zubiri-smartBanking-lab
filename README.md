@@ -5,7 +5,7 @@ A self-contained bilingual educational demonstration. All transactions are ficti
 ## How to publish an update (no command line)
 
 1. Unzip this package on your computer.
-2. Open the root of your existing GitHub repository `zubiri-finai-lab`.
+2. Open the root of your existing GitHub repository `zubiri-smartBanking-lab`.
 3. Choose **Add file → Upload files**, upload the extracted `index.html`, both demo HTML files, `README.md`, and `.nojekyll` into the **root**, not into a new subfolder. Use **Commit changes** to replace the older versions.
 4. Check **Actions** for the latest GitHub Pages deployment; refresh the browser to see the new version.
 
