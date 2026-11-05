@@ -1,4 +1,4 @@
-# ZUBIRI FinAI Lab · Ficha de modelo v1.3
+# ZUBIRI Smart Banking Lab · Ficha de modelo v1.4
 
 **Estado:** prueba de concepto educativa. **Propietario:** IES Xabier Zubiri-Manteo BHI. **Datos:** 100 % sintéticos. **Corte de datos:** 05/11/2026.
 

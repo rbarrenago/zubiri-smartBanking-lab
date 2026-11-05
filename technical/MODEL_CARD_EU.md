@@ -1,4 +1,4 @@
-# ZUBIRI FinAI Lab · Ereduaren fitxa v1.3
+# ZUBIRI Smart Banking Lab · Ereduaren fitxa v1.4
 
 **Egoera:** hezkuntzarako kontzeptu-proba. **Arduraduna:** IES Xabier Zubiri-Manteo BHI. **Datuak:** % 100 sintetikoak. **Azken data:** 2026/11/05.
 
