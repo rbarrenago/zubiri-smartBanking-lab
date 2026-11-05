@@ -1,4 +1,4 @@
-# ZUBIRI FinAI Lab · Ereduaren fitxa v1.2
+# ZUBIRI FinAI Lab · Ereduaren fitxa v1.3
 
 **Egoera:** hezkuntzarako kontzeptu-proba. **Arduraduna:** IES Xabier Zubiri-Manteo BHI. **Datuak:** % 100 sintetikoak. **Azken data:** 2026/11/05.
 
@@ -8,13 +8,13 @@ Fikziozko kafetegi baten eguneroko salmenten aurreikuspen esperimentala; apartek
 ## Datuak
 - CSV: `data/synthetic_transactions.csv` (493 egun, 2025/07/01etik 2026/11/05era).
 - `sales`: eguneko salmentak. **ML ereduaren helburu-aldagaia bakarrik**.
-- `receipts`: bi eguneko TPV-likidazio hipotetikoaren ondorengo sarrerak.
+- `receipts`: salmenta guztiak TPV bidez egin eta bi egun natural geroago likidatzen direla suposatuz kalkulatutako sarrerak (jaiegunak modelizatu gabe).
 - `supplier_cost`, `other_cost`: irteera simulatuak.
 - `balance`: 17.000 EUR-ko hasierako saldo batetik kalkulatutako itxierako saldoa; ez da benetako saldo erabilgarria.
 - ML aldagaiak: asteko eguna, hileko eguna, hila, urteko egunaren sinua/kosinua, asteburua, uda eta denbora-joera. Ez ditu `receipts`, `supplier_cost`, `other_cost` edo `balance` zuzenean ML iragarle gisa erabiltzen.
 
 ## Metodoa eta egungo baliozkotzea
-`HistGradientBoostingRegressor` (160 iterazio, 12 hosto gehienez, L2=15, ikasketa-tasa=.045, gutxieneko hosto-lagina=16, seed=12); 418 egun entrenamendurako eta 75 denborazko probarako. MAE=121,89 EUR; asteko egunaren araberako batezbesteko mugikorreko erreferentzia=143,17 EUR. Erreferentziak proba-aldiko aurreko benetako behaketak erabiltzen ditu; beraz, bi estrategiek ez dute epe finkoko iragarpen-horizonte bera. % 14,9ko aldea adierazgarria da soilik. Baliozkotu ondoren, eredua historia sintetiko osoarekin entrenatzen da.
+`HistGradientBoostingRegressor` (160 iterazio, 12 hosto gehienez, L2=15, ikasketa-tasa=.045, gutxieneko hosto-lagina=16, seed=12); 418 egun entrenamendurako eta 75 denborazko probarako. MAE=121,89 EUR; asteko egunaren araberako **erreferentzia finkoa**=137,31 EUR. Erreferentzia hasierako 418 entrenamendu-egunekin soilik kalkulatzen da; ez du proba-aldiko daturik erabiltzen, eta bi metodoek abiapuntu-data bera dute. % 11,2ko aldea datu sintetikoetan bakarrik da adierazgarria. Ez da rolling-origin edo horizonteen araberako baliozkotzea. Baliozkotu ondoren, eredua historia sintetiko osoarekin entrenatzen da.
 
 Simulazioak 90 egun proiektatzen ditu, kobrantza geroratuak eta ordainketa sintetikoak aplikatuz. Denborazko probako hondarren birlaginketarekin 240 ibilbide sortzen ditu. P10–P90 tartea eta 5.000 EUR-ko atalasea gurutzatzen duten simulazioen maiztasuna ez dira kalibratutako tarte edo ez-ordaintze/likidezia-arrisku probabilitate fidagarriak. Agertokien aldaketak salmenten, kostuen, atzerapenen eta aparteko gastuaren hipotesi deterministikoak dira.
 

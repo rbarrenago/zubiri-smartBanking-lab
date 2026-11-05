@@ -43,11 +43,10 @@ model=HistGradientBoostingRegressor(max_iter=160,max_leaf_nodes=12,l2_regulariza
 model.fit(features[:train_cut],sales[:train_cut])
 pred_hold=model.predict(features[train_cut:])
 mae=float(mean_absolute_error(sales[train_cut:],pred_hold))
-# A calendar-aware and realistic naive baseline: weekday average over trailing 28 days
-naive=[]
-for j in range(train_cut,len(dates)):
-    prior=[sales[k] for k in range(max(0,j-28),j) if dates[k].weekday()==dates[j].weekday()]
-    naive.append(np.mean(prior))
+# Fixed-origin weekday baseline: use ONLY sales available before the 75-day holdout.
+# Unlike an updating/rolling baseline, this uses the same information cutoff as the ML model.
+weekday_reference={day:float(sales[:train_cut][np.array([d.weekday()==day for d in dates[:train_cut]])].mean()) for day in range(7)}
+naive=np.array([weekday_reference[d.weekday()] for d in dates[train_cut:]])
 naive_mae=float(mean_absolute_error(sales[train_cut:],naive))
 residuals=[float(x) for x in sales[train_cut:]-pred_hold]
 # Fit final estimator using the full synthetic history.
@@ -82,9 +81,12 @@ payload={'title':'Gros Café - ejemplo sintético','currency':'EUR',
          'future':future,'residuals':residuals,'backtest':{
          'split':'Last 75 calendar days of synthetic history',
          'holdout_days':75,'mae_model':round(mae,2),'mae_weekday_baseline':round(naive_mae,2),
+         'baseline_method':'Fixed-origin training-period weekday averages; no holdout observations used',
          'trained_on':'All synthetic history after holdout evaluation',
          'method':'HistGradientBoostingRegressor; calendar features; 75-day time-ordered holdout',
          }}
 (OUT/'demo_data.json').write_text(json.dumps(payload,ensure_ascii=False),encoding='utf-8')
-pd.DataFrame(records).to_csv(OUT/'synthetic_transactions.csv',index=False)
+# Mirror the training dataset at the location linked by the public demo.
+(OUT.parent/'data').mkdir(exist_ok=True)
+pd.DataFrame(records).to_csv(OUT.parent/'data'/'synthetic_transactions.csv',index=False)
 print(json.dumps({'history_days':len(dates),'last_balance':round(balance,2),'ML_MAE':round(mae,2), 'baseline_MAE':round(naive_mae,2), 'future30_sales_mean':round(np.mean(forecast[:30]),2)},indent=2))

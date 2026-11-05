@@ -1,31 +1,31 @@
-# ZUBIRI smart Banking Lab — GitHub Pages v1.2 · Banking review
+# ZUBIRI FinAI Lab — GitHub Pages v1.3 · Banking edition
 
-Bilingual (Basque / Spanish) educational proof of concept showing ML daily-sales forecasting plus a **separate** simplified business cash-flow simulator. All balances, revenues and payments are synthetic; this is **not** a regulated stress test, a bank's liquidity-risk model, a creditworthiness assessment, or operational financial advice.
+Bilingual (Basque / Spanish) educational prototype: **ML forecasting of daily sales** plus a separate simulated SME cash-flow projection. All data and balances are synthetic. Not a bank liquidity-risk model, credit score, regulatory stress test, or financial advice.
 
 ## Open in browser
-- `index.html`: bilingual entry point
+- `index.html`: bilingual landing page
 - `ZUBIRI_FinAI_Lab_Demo_EU.html`: Basque interactive demo
 - `ZUBIRI_FinAI_Lab_Demo.html`: Spanish interactive demo
-- `data/synthetic_transactions.csv`: complete 493-row synthetic training case
-- `technical/MODEL_CARD_EU.md`, `technical/MODEL_CARD_ES.md`: methods, caveats and validation gates
-- `technical/build_model.py`: code to regenerate synthetic dataset/model outputs
+- `data/synthetic_transactions.csv`: complete 493-day synthetic history (daily aggregates, not individual transactions)
+- `technical/MODEL_CARD_EU.md`, `technical/MODEL_CARD_ES.md`: data, validation, assumptions, limitations
+- `technical/build_model.py`: reproducible synthetic data generator and ML trainer (writes CSV into `data/` and model payload into `technical/`)
+- `technical/requirements.txt`: Python dependencies
 
-## Update an existing GitHub Pages repository (no command line)
-1. Extract the ZIP on your computer.
-2. Open your existing `zubiri-smartBanking-lab` repository → **Add file → Upload files**.
-3. Upload the files and folders to the **repository root**, preserving the `data/` and `technical/` folders. Confirm the replacements and **Commit changes**.
-4. GitHub Pages configuration: `Settings → Pages → Deploy from a branch → main → /(root)`. After deployment, refresh your page.
+## Upload to your existing GitHub Pages repository
+1. Unzip the package on your device.
+2. In `rbarrenago/zubiri-finai-lab`, select **Add file → Upload files**.
+3. Upload the extracted contents **to the root of the repo**, preserving `technical/` and `data/` directories; replace the existing files; commit to `main`.
+4. GitHub Pages should deploy from `Settings → Pages → Deploy from a branch → main → /(root)`; check **Actions** for successful deployment.
 
-Only `index.html`, the two demo HTML files, and `data/synthetic_transactions.csv` are required for the interactive site. The technical resources are recommended for due diligence/reproducibility.
+## v1.3 improvements / review findings
+- Removed unrelated future-research content from both language versions and landing page.
+- Corrected the backtest comparison: fixed weekday-mean baseline calculated **only on the original training period**, same information cutoff as the ML predictor. Synthetic 75-day holdout: **ML MAE €121.89** versus **baseline €137.31** (illustrative **11.2%** improvement). Not proven on real merchant data.
+- Explicit assumption: **100% of synthetic daily sales settle through a hypothetical POS/TPV after two calendar days**; weekends/holidays, cash sales, other bank accounts and working-capital facilities are not modeled.
+- CSV exports include scenario parameters (sales change, supplier-cost change, extra settlement delay, exceptional expense, simulation count) to facilitate review.
+- Kept clear separation between sales forecast, cash-flow rules, simulated outcome distribution, and operational or credit-risk decisions.
+- Main interactive functionality is unchanged: 30/60/90 days, scenario presets, sliders, reset, chart, and CSV.
 
-## Changes from v1.1
-- Tightened bank-domain terminology: settlements vs sales; projected business cash balance vs available account balance; simulation threshold vs credit-risk alert; stress scenario vs regulatory stress testing.
-- Added bank-facing section 04 in both languages (business banking, data science, security/risk and regulatory governance).
-- Added glossary, pilot validation gates, student skill mappings and explicit methodological cautions.
-- Kept the SmartCity future research section independent of any banking/commercial data exchange.
-- Kept simulation controls (30/60/90 days; scenarios and sliders), output and CSV exports.
+## Scientific and banking limitations
+One synthetic dataset and one time-based holdout do not establish generalization. No rolling-origin/multi-horizon backtests, independently calibrated predictive intervals, external validation, or actual cash-balance accuracy tests have been completed. Simulated crossings of the €5,000 illustrative threshold are **not real financial-risk probabilities**. Any real pilot requires approved data, consent or other lawful basis where applicable, reconciliation, governance, security, human oversight, and model validation.
 
-## Important methodological limitation
-The baseline in the 75-day test uses prior *observed* test-window sales for rolling weekday averages. The ML comparison is therefore **not** a fully horizon-matched forecasting study. For a serious pilot, run comparable rolling-origin backtests at defined horizons, and test actual cash-balance predictions as well as sales.
-
-No private banking/customer data, API keys or credentials should be added to this public GitHub repository.
+The current webpage is self-contained and makes no banking API calls. **Never commit private customer/bank information, API keys or credentials to a public repo.**
